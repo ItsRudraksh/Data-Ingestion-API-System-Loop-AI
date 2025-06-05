@@ -2,6 +2,10 @@
 
 A simple API system to test skills in building APIs and incorporating basic logic. This system provides two RESTful APIs: one for submitting a data ingestion request and another for checking its status. The system fetches data from a simulated external API, processes it in batches asynchronously, and respects a rate limit.
 
+**PLEASE NOTE: This API is hosted on Render and has a 15-minute sleep time. Please visit the URL below once to activate it before making requests.**
+
+**Hosted URL:** https://ingestapi.onrender.com
+
 ## Project Structure
 
 ```
@@ -95,12 +99,20 @@ npm test
 ### Submit an Ingestion Request (POST /ingest)
 
 ```bash
+curl -X POST https://ingestapi.onrender.com/ingest -H "Content-Type: application/json" -d '{"ids": [10, 11, 12, 13, 14], "priority": "MEDIUM"}'
+```
+
+```bash
 curl -X POST http://localhost:5000/ingest -H "Content-Type: application/json" -d '{"ids": [10, 11, 12, 13, 14], "priority": "MEDIUM"}'
 ```
 
-### Get Ingestion Status (GET /status/:ingestion_id)
+### Get Ingestion Status (GET /ingest/status/:ingestion_id)
 
 Replace `<ingestion_id>` with the actual ID returned from a POST /ingest request.
+
+```bash
+curl https://ingestapi.onrender.com/ingest/status/<ingestion_id>
+```
 
 ```bash
 curl http://localhost:5000/ingest/status/<ingestion_id>
